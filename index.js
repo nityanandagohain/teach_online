@@ -14,4 +14,8 @@ io.on("connection", socket => {
     console.log("sending");
     socket.broadcast.emit("stream", image);
   });
+  socket.on("canvas", image => {
+    console.log("sending");
+    socket.broadcast.emit("canvas", image);
+  });
 });

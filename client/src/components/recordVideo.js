@@ -33,11 +33,12 @@ class RecordVideo extends Component {
   componentDidMount = () => {
     const canvas = this.refs.canvas;
     this.context = canvas.getContext("2d");
-    canvas.width = 800;
-    canvas.height = 600;
+    canvas.width = 400;
+    canvas.height = 280;
     canvas.style.display = "none";
     this.context.width = canvas.width;
     this.context.height = canvas.height;
+    this.recordSt();
   };
   render() {
     return (
@@ -46,11 +47,9 @@ class RecordVideo extends Component {
         <video
           src=""
           ref="video"
-          style={{ width: 680, height: 380 }}
+          style={{ width: 580, height: 280 }}
           autoPlay={true}
         />
-        <button onClick={this.recordSt}>start video stream</button>
-        <p>canvas below</p>
         <canvas id="preview" ref="canvas" />
       </div>
     );
