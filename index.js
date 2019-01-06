@@ -11,11 +11,9 @@ const io = socket(server);
 io.on("connection", socket => {
   console.log(`New socket connection with id: ${socket.id}`);
   socket.on("stream", image => {
-    console.log("sending");
     socket.broadcast.emit("stream", image);
   });
   socket.on("canvas", image => {
-    console.log("sending");
     socket.broadcast.emit("canvas", image);
   });
 });

@@ -3,7 +3,7 @@ import {emitVideo} from "../api/socketconn";
 
 class RecordVideo extends Component {
   recordSt = () => {
-    console.log("recoed st");
+    console.log("Stream started");
     navigator.getUserMedia =
       navigator.getUserMedia ||
       navigator.webkitGetUserMedia ||
