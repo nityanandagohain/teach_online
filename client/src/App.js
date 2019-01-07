@@ -1,32 +1,46 @@
 import React, { Component } from "react";
+import Button from "@material-ui/core/Button";
 import "./App.css";
 import RecordVideo from "./components/recordVideo";
 import RecieveVideo from "./components/recieveVideo";
 import DrawOnCanvas from "./components/drawOnCanvas";
 import CanvasRecieve from "./components/canvasRecieve";
+import ButtonAppBar from "./components/customAppBar";
 
 class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      disp: false,
-      dispr: false
+      teacher: false,
+      student: false,
+      showButtons: true
     };
   }
-  changed = () => {
+  showTeacherInterface = () => {
     this.setState({
-      disp: !this.state.disp
+      teacher: !this.state.teacher
     });
+    this.hideButtons();
   };
-  changer = () => {
+  showStudentInterface = () => {
     this.setState({
-      dispr: !this.state.dispr
+      student: !this.state.student
+    });
+    this.hideButtons();
+  };
+
+  hideButtons = () => {
+    this.setState({
+      showButtons: false
     });
   };
   render() {
     return (
       <div className="App">
-        {this.state.disp ? (
+        {/***************** If the user is a teacher************************ */}
+        {/* **************************************************************** */}
+        <ButtonAppBar />
+        {this.state.teacher ? (
           <div>
             <strong>TEACHER</strong>
             <DrawOnCanvas />
@@ -35,7 +49,10 @@ class App extends Component {
         ) : (
           <div />
         )}
-        {this.state.dispr ? (
+
+        {/***************** If the user is a  student ************************/}
+        {/* **************************************************************** */}
+        {this.state.student ? (
           <div>
             <strong>STUDENT</strong>
             <CanvasRecieve />
@@ -44,8 +61,33 @@ class App extends Component {
         ) : (
           <div />
         )}
-        <button onClick={this.changed}>teacher</button>
-        <button onClick={this.changer}>student</button>
+
+        {/******************** Buttons *************************/}
+        {/* ************************************************** */}
+        {this.state.showButtons ? (
+          <div>
+            <div style={{ margin: 20 }}>
+              <strong style={{ fontSize: 30 }}>You are a </strong>
+              <Button
+                onClick={this.showTeacherInterface}
+                variant="contained"
+                style={{ marginLeft: 20 }}
+              >
+                <strong>teacher</strong>
+              </Button>
+              <Button
+                onClick={this.showStudentInterface}
+                variant="contained"
+                style={{ marginLeft: 20, marginRight: 20 }}
+              >
+                <strong>student</strong>
+              </Button>
+              <strong style={{ fontSize: 30 }}>?</strong>
+            </div>
+          </div>
+        ) : (
+          <div />
+        )}
       </div>
     );
   }

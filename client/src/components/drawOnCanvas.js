@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import CanvasDraw from "react-canvas-draw";
+import Button from "@material-ui/core/Button";
 import { emitCanvas } from "../api/socketconn";
 
 class DrawOnCanvas extends Component {
@@ -34,8 +35,8 @@ class DrawOnCanvas extends Component {
     return (
       <div>
         <CanvasDraw
-          canvasWidth={window.innerWidth-50}
-          canvasHeight={window.innerHeight-500}
+          canvasWidth={window.innerWidth - 50}
+          canvasHeight={window.innerHeight - 500}
           brushColor={"#111"}
           lazyRadius={0}
           brushRadius={this.state.brushRadius}
@@ -43,10 +44,23 @@ class DrawOnCanvas extends Component {
             this._canvas = canvas;
           }}
         />
-        <button onClick={this.clearCanvas}>CLEAR</button>
-        <button onClick={this.undoCanvas}>UNDO</button>
-        <button onClick={this.increaseBrushRadius}>+</button>
-        <button onClick={this.decreaseBrushRadius}>-</button>
+        <p>{this.state.brushRadius}</p>
+        <Button onClick={this.clearCanvas}>
+          <strong>CLEAR</strong>
+        </Button>
+        <Button onClick={this.undoCanvas}>
+          <strong>UNDO</strong>
+        </Button>
+        <Button
+          onClick={this.increaseBrushRadius}
+          style={{ marginLeft: 40, fontSize: 30 }}
+        >
+          <strong>+</strong>
+        </Button>
+        <Button onClick={this.decreaseBrushRadius}>
+          <strong style={{ fontSize: 30 }}>-</strong>
+        </Button>
+        
       </div>
     );
   }

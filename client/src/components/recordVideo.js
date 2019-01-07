@@ -43,11 +43,11 @@ class RecordVideo extends Component {
   render() {
     return (
       <div>
-        <p>In record video</p>
+        <p>Your are Live!</p>
         <video
           src=""
           ref="video"
-          style={{ width: 580, height: 280 }}
+          style={{ width: 480, height: 180 }}
           autoPlay={true}
         />
         <canvas id="preview" ref="canvas" />
