@@ -1,94 +1,20 @@
 import React, { Component } from "react";
-import Button from "@material-ui/core/Button";
+import { Provider } from "react-redux";
+import store from "./store";
 import "./App.css";
-import RecordVideo from "./components/recordVideo";
-import RecieveVideo from "./components/recieveVideo";
-import DrawOnCanvas from "./components/drawOnCanvas";
-import CanvasRecieve from "./components/canvasRecieve";
-import ButtonAppBar from "./components/customAppBar";
+// import HomePage from "./components/homePage";
+import authPage from "./components/authPage";
+import customAppBar from "./components/customAppBar";
 
 class App extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      teacher: false,
-      student: false,
-      showButtons: true
-    };
-  }
-  showTeacherInterface = () => {
-    this.setState({
-      teacher: !this.state.teacher
-    });
-    this.hideButtons();
-  };
-  showStudentInterface = () => {
-    this.setState({
-      student: !this.state.student
-    });
-    this.hideButtons();
-  };
-
-  hideButtons = () => {
-    this.setState({
-      showButtons: false
-    });
-  };
   render() {
     return (
-      <div className="App">
-        {/***************** If the user is a teacher************************ */}
-        {/* **************************************************************** */}
-        <ButtonAppBar />
-        {this.state.teacher ? (
-          <div>
-            <strong>TEACHER</strong>
-            <DrawOnCanvas />
-            <RecordVideo />
-          </div>
-        ) : (
-          <div />
-        )}
-
-        {/***************** If the user is a  student ************************/}
-        {/* **************************************************************** */}
-        {this.state.student ? (
-          <div>
-            <strong>STUDENT</strong>
-            <CanvasRecieve />
-            <RecieveVideo />
-          </div>
-        ) : (
-          <div />
-        )}
-
-        {/******************** Buttons *************************/}
-        {/* ************************************************** */}
-        {this.state.showButtons ? (
-          <div>
-            <div style={{ margin: 20 }}>
-              <strong style={{ fontSize: 30 }}>You are a </strong>
-              <Button
-                onClick={this.showTeacherInterface}
-                variant="contained"
-                style={{ marginLeft: 20 }}
-              >
-                <strong>teacher</strong>
-              </Button>
-              <Button
-                onClick={this.showStudentInterface}
-                variant="contained"
-                style={{ marginLeft: 20, marginRight: 20 }}
-              >
-                <strong>student</strong>
-              </Button>
-              <strong style={{ fontSize: 30 }}>?</strong>
-            </div>
-          </div>
-        ) : (
-          <div />
-        )}
-      </div>
+      <Provider store={store}>
+        <div className="App">
+        <customAppBar/>
+          <authPage />
+        </div>
+      </Provider>
     );
   }
 }
